@@ -1,0 +1,246 @@
+{%extends 'base.html'%}
+
+{%block content%}
+{% include 'status.html'%}
+
+{% if user.is_superuser %}
+<div class="row">
+    <div class="col-md-5">
+        <hr>
+        <h5>Wedding Appointments:</h5>
+        <div class="card card-body">
+            <!-- <a class="btn btn-primary btn-sm btn-block"href="christiansR.html">Join us</a> -->
+            <table class="table table-sa">
+
+                <tr>
+                    <th>Groom Name</th>
+                    <th>Bride Name</th>
+                    <th>Phone Number</th>
+                    <th>wedding Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+
+                </tr>
+                <tr>
+                    {%for wedding in page_obj_wedding%}
+                </tr>
+                <tr>
+                    <td>{{wedding.groomName}}</td>
+                    <td>{{wedding.brideName}}</td>
+                    <td>{{wedding.phone}}</td>
+                    <td>{{wedding.date}}</td>
+                    <td>{{wedding.status}}</td>
+                    <td>
+                        {% if wedding.status == 'Pending'%}
+                        <a class="btn btn-sm btn-success" href="{% url 'approve_wedding' wedding.id %}">Approve</a>
+                        {% elif wedding.status == 'Approved' %}
+                        <a class="btn btn-sm btn-danger" href="{% url 'cancel_wedding' wedding.id %}">Cancel</a>
+                        {% endif %}
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </table>
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+
+                    {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-7">
+
+
+        <hr>
+        <h5>Members of the Church</h5>
+        <div class="card card-body">
+            <!-- <a class="btn btn-primary btn-sm btn-block" href="cong.html">Add a Member</a> -->
+            <a class="btn btn-primary btn-sm btn-block" href="{% url 'add_cong' %}">Add a Member</a>
+
+
+            <table class="table table-sa">
+
+                <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <!--<th>DOB</th>-->
+                    <th>gender </th>
+                    <th>Marital Status</th>
+                    <th>Joined Date </th>
+                    <th>Update</th>
+                    <th>Remove</th>
+
+                </tr>
+                <tr>
+                    {%for member in page_obj%}
+                </tr>
+                <tr>
+                    <td>{{member.firstname}}</td>
+                    <td>{{member.lastname}}</td>
+                    <td>{{member.phoneNumber}}</td>
+                    <td>{{member.address}}</td>
+                    <!-- <td>{{member.DOB}}</td>-->
+                    <td>{{member.gender}}</td>
+                    <td>{{member.maritalStatus}}</td>
+                    <td>{{member.date}}</td>
+
+                    <td><a class="btn btn-sm btn-info" href="{% url 'update_congregant' member.id %}">Update</a></td>
+                    <td><a class="btn btn-sm btn-danger" href="{% url 'Delete_congregant' member.id %}">Remove</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+
+                    {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% else %}
+<div class="row">
+    <div class="col-md-5">
+        <h5>Pastor Appointments:</h5>
+        <div class="card card-body">
+            <!-- <a class="btn btn-primary btn-sm btn-block"href="christiansR.html">Join us</a> -->
+            <table class="table table-sa">
+
+                <tr>
+                    <th>Appointee Name</th>
+                    <th>Reason</th>
+                    <th>Phone Number</th>
+                    <th>Appointment Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+
+                </tr>
+                <tr>
+                    {%for appoi in page_obj_apps%}
+                </tr>
+                <tr>
+                    <td>{{appoi.appointee}}</td>
+                    <td>{{appoi.reason}}</td>
+                    <td>{{appoi.phoneNumber}}</td>
+                    <td>{{appoi.Date}}</td>
+                    <td style="color: tomato;">{{appoi.status}}</td>
+                    <td>
+                        {% if appoi.status == 'Pending'%}
+                        <a class="btn btn-sm btn-success" href="{% url 'xx' appoi.id %}">Approve</a>
+                        {% elif appoi.status == 'Approved' %}
+                        <a class="btn btn-sm btn-danger" href="{% url 'yy' appoi.id %}">Cancel</a>
+                        {% endif %}
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </table>
+
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginatorWed.num_pages }}.
+                    </span>
+
+                    {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-7">
+        <h5>Tithes and offerings:</h5>
+        <div class="card card-body">
+            <!-- <a class="btn btn-primary btn-sm btn-block"href="christiansR.html">Join us</a> -->
+            <table class="table table-sa">
+
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Amount</th>
+                </tr>
+                <tr><h3 class="success" style="color: #000;"><strong>Total: {{sum_donation}} RWF</strong></h3></tr>
+
+                <tr>
+                    {%for give in page_obj_app%}
+                </tr>
+                <tr>
+                    <td>{{give.name}}</td>
+                    <td>{{give.email}}</td>
+                    <td>{{give.phone}}</td>
+                    <td>{{give.amount}}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginatorWed.num_pages }}.
+                    </span>
+
+                    {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{% endif %}
+
+
+
+
+
+
+
+
+
+{% endblock %}

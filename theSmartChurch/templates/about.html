@@ -1,0 +1,827 @@
+{%extends 'base.html'%}
+{% load static%}
+{% block content %}
+{{block.super}}
+<style>
+      @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,400&display=swap');
+    * {
+        box-sizing: border-box;
+        margin: 0px;
+        padding: 0px;
+        max-width: 100%;
+    }
+
+    img {
+        width: 100%;
+    }
+
+    p {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 26px;
+        color: #6a6972;
+    }
+
+    .homefirstcont {
+        background: url("../../media/images/overlay.png");
+        width: 100%;
+        height: 100%;
+        background-size: 200px 200px;
+        font-family: 'Roboto', sans-serif;
+        background-attachment: fixed, fixed;
+        background-position: top left, center center;
+        padding: 0;
+    }
+
+    .homefirstcont .two {
+        background: url("../../media/images/overlay.png");
+        background-color: #b8d3d2;
+        background-size: 200px 200px;
+        background-attachment: fixed;
+        background-position: top left, center center;
+    }
+
+    .homefirstcont .first {
+        font-size: 5vw;
+        font-family: 'Roboto', sans-serif;    }
+
+    .homefirstcont .second {
+        font-size: 3.6vw;
+        text-indent: 5%;
+    }
+
+    .homefirstcont .third {
+        font-size: 1.8vw;
+        text-align: center;
+        width: 80%;
+        margin-left: 5%;
+        font-style: italic;
+    }
+
+    .homefirstcont .third::first-letter {
+        font-size: 3vw;
+        color: #474787;
+    }
+
+    @media (max-width: 575px) {
+        .homefirstcont .first {
+            font-size: 7vw;
+        }
+
+        .homefirstcont .second {
+            font-size: 6vw;
+        }
+
+        .homefirstcont .third {
+            font-size: 4vw;
+        }
+
+        .homefirstcont .third::first-letter {
+            font-size: 6vw;
+            color: #474787;
+        }
+    }
+
+
+
+
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+    }
+
+    .sidebar .sidebar-widget {
+        position: relative;
+        width: 100%;
+        margin-bottom: 45px;
+    }
+
+    .sidebar .sidebar-widget h2.sw-title {
+        color: #474787;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 3px double #474787;
+    }
+
+    .sidebar .sidebar-widget .news-list {
+        position: relative;
+        margin-bottom: 30px;
+    }
+
+    .sidebar .news-list .nl-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .sidebar .news-list .nl-item .nl-img {
+        width: 100px;
+    }
+
+    .sidebar .news-list .nl-item .nl-img img {
+        width: 100px;
+    }
+
+    .sidebar .news-list .nl-item .nl-title {
+        padding-left: 15px;
+    }
+
+    .sidebar .news-list .nl-item .nl-title a {
+        color: #474787;
+        font-size: 16px;
+        font-weight: 400;
+        transition: all .3s;
+    }
+
+    .sidebar .news-list .nl-item .nl-title a:hover {
+        color: #474787;
+    }
+
+    .sidebar .sidebar-widget .tab-news {
+        position: relative;
+        margin-bottom: 30px;
+    }
+
+    .sidebar .tab-news .nav.nav-pills .nav-link {
+        color: #ffffff;
+        background: #474787;
+        border-radius: 0;
+    }
+
+    .sidebar .tab-news .nav.nav-pills .nav-link:hover,
+    .sidebar .tab-news .nav.nav-pills .nav-link.active {
+        color: #ffffff;
+        background: #474787;
+    }
+
+    .sidebar .tab-news .tab-content {
+        padding: 15px 0 0 0;
+        background: transparent;
+    }
+
+    .sidebar .tab-news .tab-content .container {
+        padding: 0;
+    }
+
+    .sidebar .tab-news .tn-news {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .sidebar .tab-news .tn-img {
+        width: 100px;
+    }
+
+    .sidebar .tab-news .tn-img img {
+        width: 100px;
+    }
+
+    .sidebar .tab-news .tn-title {
+        padding: 0 0 0 15px;
+    }
+
+    .sidebar .tab-news .tn-title a {
+        color: #474787;
+        font-size: 16px;
+        font-weight: 400;
+        transition: all .3s;
+    }
+
+    .sidebar .tab-news .tn-title a:hover {
+        color: #474787;
+    }
+
+    .sidebar .sidebar-widget .category {
+        position: relative;
+    }
+
+    .sidebar .category ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .sidebar .category ul li {
+        margin: 0 0 12px 22px;
+    }
+
+    .sidebar .category ul li:last-child {
+        margin-bottom: 0;
+    }
+
+    .sidebar .category ul li a {
+        display: inline-block;
+        color: #474787;
+        line-height: 23px;
+    }
+
+    .sidebar .category ul li a:hover {
+        color: #474787;
+    }
+
+    .sidebar .category ul li::before {
+        position: absolute;
+        content: '\f061';
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        color: #474787;
+        left: 1px;
+    }
+
+    .sidebar .category ul li span {
+        display: inline-block;
+        float: right;
+    }
+
+    .sidebar .sidebar-widget .tags {
+        position: relative;
+    }
+
+    .sidebar .sidebar-widget .tags a {
+        display: inline-block;
+        margin-bottom: 5px;
+        padding: 5px 10px;
+        color: #474787;
+        background: #ffffff;
+        border: 1px solid #474787;
+        border-radius: 4px;
+    }
+
+    .sidebar .sidebar-widget .tags a:hover {
+        color: #ffffff;
+        background: #474787;
+        border: 1px solid #474787;
+    }
+
+    .sidebar .sidebar-widget .image a {
+        display: block;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .sidebar .sidebar-widget .image img {
+        max-width: 100%;
+        transition: .3s;
+    }
+
+    .sidebar .sidebar-widget .image img:hover {
+        transform: scale(1.1);
+        filter: blur(3px);
+        -webkit-filter: blur(3px);
+    }
+
+
+
+
+
+
+    .single-services {
+        background-color: #fff;
+        -webkit-box-shadow: 0px 5px 30px 0px rgba(167, 167, 167, 0.16);
+        -moz-box-shadow: 0px 5px 30px 0px rgba(167, 167, 167, 0.16);
+        box-shadow: 0px 5px 30px 0px rgba(167, 167, 167, 0.16);
+        -webkit-transition: all 0.3s ease-out 0s;
+        -moz-transition: all 0.3s ease-out 0s;
+        -ms-transition: all 0.3s ease-out 0s;
+        -o-transition: all 0.3s ease-out 0s;
+        transition: all 0.3s ease-out 0s;
+        padding: 50px 30px;
+        border: 2px solid transparent;
+        border-radius: 8px;
+    }
+
+    @media (max-width: 767px) {
+        .single-services {
+            padding: 20px 20px 30px;
+        }
+    }
+
+    .single-services .services-icon {
+        display: inline-block;
+        position: relative;
+    }
+
+    .single-services .services-icon img {
+        -webkit-transition: all 0.4s ease-out 0s;
+        -moz-transition: all 0.4s ease-out 0s;
+        -ms-transition: all 0.4s ease-out 0s;
+        -o-transition: all 0.4s ease-out 0s;
+        transition: all 0.4s ease-out 0s;
+    }
+
+    .single-services .services-icon .shape-1 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    .single-services .services-icon i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        font-size: 34px;
+        color: #fff;
+    }
+
+    .single-services .services-content .services-title a {
+        font-size: 26px;
+        font-weight: 700;
+        color: #2E2E2E;
+        -webkit-transition: all 0.3s ease-out 0s;
+        -moz-transition: all 0.3s ease-out 0s;
+        -ms-transition: all 0.3s ease-out 0s;
+        -o-transition: all 0.3s ease-out 0s;
+        transition: all 0.3s ease-out 0s;
+    }
+
+    @media only screen and (min-width: 992px) and (max-width: 1199px) {
+        .single-services .services-content .services-title a {
+            font-size: 24px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .single-services .services-content .services-title a {
+            font-size: 20px;
+        }
+    }
+
+    .single-services .services-content .services-title a:hover {
+        color: #361CC1;
+    }
+
+    .single-services .services-content .text {
+        margin-top: 30px;
+    }
+
+    @media (max-width: 767px) {
+        .single-services .services-content .text {
+            margin-top: 20px;
+        }
+    }
+
+    .single-services .services-content .more {
+        margin-top: 30px;
+        font-size: 16px;
+        font-weight: 400;
+        color: #2E2E2E;
+        -webkit-transition: all 0.3s ease-out 0s;
+        -moz-transition: all 0.3s ease-out 0s;
+        -ms-transition: all 0.3s ease-out 0s;
+        -o-transition: all 0.3s ease-out 0s;
+        transition: all 0.3s ease-out 0s;
+    }
+
+    .single-services .services-content .more i {
+        margin-left: 10px;
+    }
+
+    .single-services .services-content .more:hover {
+        color: #474787;
+    }
+
+    .single-services:hover {
+        border-color: #e2c20b;
+    }
+
+    .single-services:hover .services-icon .shape {
+        -webkit-transform: rotate(250deg);
+        -moz-transform: rotate(250deg);
+        -ms-transform: rotate(250deg);
+        -o-transform: rotate(250deg);
+        transform: rotate(250deg);
+    }
+    /* .footer {
+    background-color:#474787;
+    padding: 20px 0;
+  }
+
+  .footer-col {
+    width: 25%;
+    padding: 0 15px;
+  }
+
+  .footer-col h4 {
+    font-size: 18px;
+    color: #ffffff;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+  } */
+
+  /* .footer-col h4::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color:#474787;
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+  }
+
+  .footer-col ul li:not(:last-child) {
+    margin-bottom: 10px;
+  } */
+
+  .footer-col ul li a {
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 300;
+    color: #ffffff;
+    display: block;
+    transition: all 0.3s ease;
+  }
+/* 
+  .footer-col ul li a:hover {
+    color: #ffffff;
+    padding-left: 8px;
+  } */
+
+  /* .footer-col .social-links a {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.5s ease;
+  } */
+
+  /* .footer-col .social-links a:hover {
+    color: #24262b;
+    background-color: #ffffff;
+  }
+
+  /*responsive*/
+  /* @media(max-width: 767px) {
+    .footer-col {
+      width: 50%;
+      margin-bottom: 30px;
+    }
+  } */
+
+  /* @media(max-width: 574px) {
+    .footer-col {
+      width: 100%;
+    }
+  }
+
+  .bottom {
+    align-items: bottom;
+    margin-top: 20px;
+    margin-bottom: -10px;
+
+  }  */
+
+  /* .bottom center a {
+    color: #ffffff;
+    text-decoration: none;
+    
+  }
+
+  .bottom center a:hover {
+    text-decoration: underline;
+  }
+
+  .bottom center span {
+    color: #fff;
+  } */
+  .scroll-top {
+  width: 5%;
+  height: 10%;
+  position:fixed;
+  bottom: 5px;
+  left: 95%;
+  background-color: #fff;
+  border: 1px solid #0b6ab8;
+  
+  
+  
+  display: none;
+}
+.scroll-top:hover{
+  background-color: #fff;
+}
+.scroll-top i {
+  display: inline-block;
+  color: #474787 ;
+  
+}
+
+
+
+
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      offset: 120,
+      easing: 'ease-in-out'
+    })
+    $(document).ready(function () {
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 100) {
+      $('.scroll-top').fadeIn();
+    } else {
+      $('.scroll-top').fadeOut();
+    }
+  });
+
+  $('.scroll-top').click(function () {
+    $("html, body").animate({
+      scrollTop: 0
+    }, 100);
+      return false;
+  });
+
+});
+
+  </script>
+
+
+</head>
+
+<section class="container-fluid homefirstcont pt-5 " id="homefirstcont">
+    <div class="row  justify-content-between align-items-center">
+        <div class="col-12 col-sm-4  text-center one">
+            <img src="../../media/images/olsunrespect.png" class="img-responsive img-fluid" data-aos="zoom-in-up" data-aos-duration="5000" data-aos-delay="800">
+        </div>
+        <div class="col-12 col-sm-8 bg-white py-4 two" data-aos="fade-left" data-aos-duration="6000" data-aos-delay="1000">
+            <h1 class="second" style="color: #474787;">Mission</h1>
+            <p class="third">Our Mission is To fulfill the commission that Jesus Christ gave to His followers to go into
+                the world and make disciples of all people. Our purpose is to save the lost and to build up and
+                encourage those who are already believers. We pledge to our viewers & supporters to take all the Gospel
+                to all the world and to all generations.</p>
+        </div>
+    </div>
+</section>
+
+<section class="container-fluid bg-light">
+    <div class="row align-items-center" >
+        <div class="col-md-9">
+
+            <section id="features" class="services-area pt-10" >
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10">
+                            <div class="section-title text-left pb-10">
+                                <h3 class="title" style="color: #474787; text-align: center; margin-top: 5%; margin-bottom: 5%; margin-left: 5%;">More About Us</h3>
+                            </div> <!-- section title -->
+                        </div>
+                    </div> <!-- row -->
+                    <div class="row justify-content-center" >
+                        <div class="col-10 col-md-6 col-lg-4">
+                            <div class="single-services text-center mt-30 " data-wow-duration="1s"
+                                data-wow-delay="0.2s" data-aos="fade-right" data-aos-duration="9000" data-aos-delay="1400">
+                                <div class="services-icon">
+                                    <img src="../../media/images/jesus.jpg" alt="shape">
+
+                                </div>
+                                <div class="services-content mt-30">
+                                    <h4 class="services-title" style="color: #474787;">THE LORD JESUS CHRIST</h4>
+                                    <p class="text">We believe in the deity of Jesus Christ as the only begotten Son of
+                                        God. We believe in His substitutionary death for all men, His resurrection, and
+                                        His eventual return to judge the world.</p>
+                                </div>
+                            </div> <!-- single services -->
+                        </div>
+                        <div class="col-10 col-md-6 col-lg-4" data-aos="fade-left" data-aos-duration="8000" data-aos-delay="1200">
+                            <div class="single-services text-center mt-30 " data-wow-duration="1s"
+                                data-wow-delay="0.5s">
+                                <div class="services-icon">
+                                    <img src="../../media/images/salvation.jpg" alt="shape">
+
+                                </div>
+                                <div class="services-content mt-30" >
+                                    <h4 class="services-title" style="color: #474787;">SALVATION</h4>
+                                    <p class="text">We believe all are born with a sinful nature and that the work of
+                                        Christ’s atonement at the Cross was to redeem us from the power of sin. We
+                                        believe that this salvation from sin is available to all who are willing to
+                                        receive it.
+                                         <!-- through the prayer of salvation. -->
+                                        </p>
+                                </div>
+                            </div> <!-- single services -->
+                        </div>
+                        <div class="col-10 col-md-6 col-lg-4">
+                            <div class="single-services text-center mt-30 " data-wow-duration="1s"
+                                data-wow-delay="0.8s" data-aos="fade-left" data-aos-duration="10000" data-aos-delay="1600">
+                                <div class="services-icon">
+                                    <img src="../../media/images/holyspirit.jpg" alt="shape">
+
+                                </div>
+                                <div class="services-content mt-30">
+                                    <h4 class="services-title" style="color: #474787;">THE HOLY SPIRIT</h4>
+                                    <p class="text">We believe in the Holy Spirit as the third person of the Trinity.
+                                        The Trinity consists of God the Father, Jesus His Son and the Holy Spirit. We
+                                        believe in the Baptism of the Holy Spirit,
+                                         <!-- and the comforting interaction of the
+                                        Holy Spirit with man. -->
+                                    </p>
+
+                                </div>
+                            </div> <!-- single services -->
+                        </div>
+                    </div> <!-- row -->
+                </div> <!-- container -->
+            </section>
+        </div>
+
+        <div class="col-md-3 bg-white">
+            <div class="">
+                <div class="sidebar">
+                    <div class="sidebar-widget">
+                        <h2 class="sw-title" style="color: #474787;">Anouncement</h2>
+                        <div class="news-list">
+                            <div class="mt-sm-1 mt-md-4 nl-item">
+                                <div class="nl-img">
+                                    <img src="../../media/images/blog-1.jpg" />
+                                </div>
+                                <div class="nl-title" data-aos="fade-up" data-aos-duration="10000" data-aos-delay="1600">
+                                    <a href="">Next Sunday Blessed Choir will lead the whole service</a>
+                                </div>
+                            </div>
+                            <div class="mt-sm-1 mt-md-4 nl-item">
+                                <div class="nl-img">
+                                    <img src="../../media/images/blog-1.jpg" />
+                                </div>
+                                <div class="nl-title" data-aos="fade-up" data-aos-duration="12000" data-aos-delay="1700">
+                                    <a href="">Those who registered for baptism have to check their list</a>
+                                </div>
+                            </div>
+                            <div class="mt-sm-1 mt-md-4 nl-item">
+                                <div class="nl-img">
+                                    <img src="../../media/images/blog-1.jpg" />
+                                </div>
+                                <div class="nl-title" data-aos="fade-up" data-aos-duration="13000" data-aos-delay="1800">
+                                    <a href="">Remember to register to attend the service using app</a>
+                                </div>
+                            </div>
+                            <div class="mt-sm-1 mt-md-4 nl-item">
+                                <div class="nl-img">
+                                    <img src="../../media/images/blog-1.jpg" />
+                                </div>
+                                <div class="nl-title" data-aos="fade-up" data-aos-duration="14000" data-aos-delay="1900">
+                                    <a href="">Thank you to the choir that took us through today's sunday</a>
+                                </div>
+                            </div>
+                            <!-- <div class="mt-sm-1 mt-md-4 nl-item">
+                                <div class="nl-img">
+                                    <img src="../../media/images/blog-1.jpg" />
+                                </div>
+                                <div class="nl-title">
+                                    <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+            </div>
+</section>
+
+
+
+<section class="services-area pt-10" style="margin-top: -14%;">
+    <div class="container-fluid" style="padding-top: 15%; background-color: rgb(250, 250, 250);">
+
+        <div class="row justify-content-center">
+            <div class="col-10 col-sm-6 col-md-4" data-aos="fade-right" data-aos-duration="8000" data-aos-delay="900">
+                <div class="single-services text-center mt-30 " data-wow-duration="1s" data-wow-delay="0.2s">
+                    <div class="services-icon">
+                        <img src="../../media/images/evangil.jpg" alt="shape">
+
+                    </div>
+                    <div class="services-content mt-30">
+                        <h4 class="services-title" style="color: #474787;">EVANGELISM</h4>
+                        <p class="text">The Lord commands us to evangelize all people and nations by sharing the Gospel
+                            of Jesus Christ. We believe that this is the obligation of every follower of Jesus Christ.
+                        </p>
+
+                    </div>
+                </div> <!-- single services -->
+            </div>
+            <div class="col-10 col-sm-6 col-md-4" data-aos="fade-left" data-aos-duration="9000" data-aos-delay="1000">
+                <div class="single-services text-center mt-30" data-wow-duration="1s" data-wow-delay="0.5s">
+                    <div class="services-icon">
+                        <img src="../../media/images/stepw.jpg" alt="shape">
+
+                    </div>
+                    <div class="services-content mt-30">
+                        <h4 class="services-title" style="color: #474787;">STEWARDSHIP</h4>
+                        <p class="text">We believe that everyone is the steward of their life and resources, all of
+                            which ultimately belong to God, the ultimate Provider. We believe that tithing is a Biblical
+                            mandate
+                             <!-- and the measure of obedience to the scriptural principles of stewardship -->
+                            </p>
+
+                    </div>
+                </div> <!-- single services -->
+            </div>
+            <div class="col-10 col-sm-6 col-md-4">
+                <div class="single-services text-center mt-30 " data-wow-duration="1s" data-wow-delay="0.8s" data-aos="fade-right" data-aos-duration="9000" data-aos-delay="1000">
+                    <div class="services-icon">
+                        <img src="../../media/images/church.jpg" alt="shape">
+
+                    </div>
+                    <div class="services-content mt-30" >
+                        <h4 class="services-title" style="color: #474787;">THE CHURCH</h4>
+                        <p class="text">We believe in the Church as the eternal and universal Body of Christ consisting
+                            of all those who have accepted the work of Christ’s atonement. We believe in the need for a
+                            local assembly 
+                            <!-- of believers for the purpose of evangelism  -->
+                            <!-- to unbelievers and edification of
+                            the Body of Christ.  -->
+                        </p>
+
+                    </div>
+                </div> <!-- single services -->
+            </div>
+
+            <div class="col-10 col-sm-6 col-md-4">
+                <div class="single-services text-center mt-30 " data-wow-duration="1s" data-wow-delay="0.2s" data-aos="fade-right" data-aos-duration="8000" data-aos-delay="900">
+                    <div class="services-icon">
+                        <img src="../../media/images/scripture.jpg" alt="shape">
+
+                    </div>
+                    <div class="services-content mt-30">
+                        <h4 class="services-title" style="color: #474787;">THE SACRED SCRIPTURE</h4>
+                        <p class="text">We believe in the scripture as the inspired Word of God and that it is the
+                            complete revelation of God’s will for mankind. We believe in the absolute authority of the
+                            scripture 
+                            <!-- to govern  -->
+                            <!-- the affairs of mankind. -->
+                        </p>
+
+                    </div>
+                </div> <!-- single services -->
+            </div>
+            <div class="col-10 col-sm-6 col-md-4">
+                <div class="single-services text-center mt-30 " data-wow-duration="1s" data-wow-delay="0.5s" data-aos="fade-right" data-aos-duration="9000" data-aos-delay="1000">
+                    <div class="services-icon">
+                        <img src="../../media/images/prayers.jpg" alt="shape">
+
+                    </div>
+                    <div class="services-content mt-30">
+                        <h4 class="services-title" style="color: #474787;">PRAYER AND PRAISE</h4>
+                        <p class="text">We believe in the worship of the Lord through singing, clapping, and the lifting
+                            of hands. We believe in the authority of the believer to ask freely of the Lord to meet
+                            their needs 
+                            according to God’s perfect will 
+                            <!-- and in the Name of His Son, Jesus Christ.
+                        </p> -->
+
+                    </div>
+                </div> <!-- single services -->
+            </div>
+            <div class="col-10 col-sm-6 col-md-4">
+                <div class="single-services text-center mt-30 " data-wow-duration="1s" data-wow-delay="0.8s" data-aos="fade-left" data-aos-duration="9000" data-aos-delay="1000">
+                    <div class="services-icon">
+                        <img src="../../media/images/New Image.jpg" alt="shape">
+
+                    </div>
+                    <div class="services-content mt-30">
+                        <h4 class="services-title" style="color: #474787;">WATER BAPTISM</h4>
+                        <p class="text">We believe in the ordinance of water baptism by immersion of water in obedience
+                            to the Word of God. All those who have accepted Jesus Christ  should
+                            be baptized in water
+                             <!-- as their personal Savior should
+                            be baptized in water as a public profession of their faith in Christ. -->
+                        </p>
+                    </div>
+                    <!--<a href="{% url 'about' %}" class="btn-primary p-2" style="color: #ffffff; background-color:  #474787;">Get Baptized</a>
+                </div> single services -->
+            </div>
+
+        </div> <!-- row -->
+    </div> <!-- container -->
+   
+    <button class="btn btn-primary scroll-top" data-scroll="up" type="button">
+        <i class="fa fa-chevron-up"></i>
+        </button>   
+</section>
+
+
+{%endblock%}

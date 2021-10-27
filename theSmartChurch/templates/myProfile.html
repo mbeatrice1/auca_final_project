@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    h4{
+        text-align:left;
+    }
+    .container{
+        margin-top: 80px;
+    }
+</style>
+<div class="container">
+    
+    <div class="row">
+        <div class="col-lg-6" >
+            <div style="text-align:center">
+                <img src="{{profile.profile_picture.url}}"  alt="profile_pic" width="200px"  height="200px " style="border-radius: 50%;">
+            </div><br><br>
+            <div id='form' style='display: none;' >
+                <div class="card-text" style="padding: 20px;">
+                    {{form.media}}
+                    <form  action="/my_profile" method="post" enctype="multipart/form-data">
+                        {%csrf_token%}
+
+                        {{form.as_p}}
+                        <input type="submit" class="btn btn-sm btn-success" value="update">
+                    </form>
+                </div>
+            </div>
+
+        </div><br>
+        <div class="col-md-6 col-lg-6">
+            <div class="card-1">
+                <div class="card-text " style="padding: 20px;">
+                    <h5><strong> Username:</strong> {{request.user.profile.user}}</h5>
+                    <h5><strong>Email:</strong> {{request.user.profile.email}}</h5>
+                    <h5><strong>Bio:</strong>{{request.user.profile.bio}}</h5>
+                    <h5><strong>Contact:</strong>{{request.user.profile.contact}}</h5><br>
+                <a class="btn btn-info text-center" onclick="toggleFunc()" style="border-radius: 25px; color:white;"target="_blank">Edit Profile</a><br><br>
+            </div>
+            </div>
+        </div>
+    </div><hr>
+    <small><strong>Submitted {{projects|length}} projects</strong></small><br><br>
+    <div class='row'>
+        {% for project in projects %}
+        <div class="col-lg-4 col-lg-4 col-lg-4">
+            <div class="card ">
+                <img src="{{project.image.url}}"  height='180px' alt="{{project.name}}" >
+                <div class="card-text text-center" style="padding: 20px;">
+                    <h5 style="font-weight: bold;">{{project.title}}</h5>
+                    <small class="text-muted" style="font-family: Arial, Helvetica, sans-serif;">{{project.description | slice:":45" }}...</small><br><br>
+                    <a class="btn btn-info" style="border-radius: 25px;" href="/project/{{project.id}}" >Project details & Rating</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div><br><br>
+<script>
+    function toggleFunc() {
+    var x = document.getElementById("form");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+</script>
+
+{%endblock%}
+

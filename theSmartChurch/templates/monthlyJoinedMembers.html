@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sunday services</title>
+</head>
+<body>
+
+      <img src="https://i.postimg.cc/BnbcSwgQ/image-1.png" style=" width: 35%; color: rgb(86, 5, 110);">
+    </h2>
+
+    <h1 style="text-align: center; font-style: oblique; "> <strong>MONTHLY JOINED CHRISTIANS </strong></h1>
+    <br>
+
+    <table class="styled-table" border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th style="height: 35px;">First Name</th>
+                <th style="height: 35px;">Last Name </th>
+                <th style="height: 35px; margin-right: 35px;">Joined Date</th>
+                <th style="height: 35px;">Phone Number</th>
+                <th style="height: 35px;">Gender </th>
+                <th style="height: 35px;">Marital Status </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for joinedmonthlymember in joinedmonthlymembers %}
+            <tr>
+                <td style="height: 35px; padding-left: 10px;">{{ joinedmonthlymember.firstname }}</td>
+                <td style="height: 35px; padding-left: 10px;">{{ joinedmonthlymember.lastname }}</td>
+                <td style="height: 35px; padding-left: 10px;">{{ joinedmonthlymember.date }}</td>
+                <td style="height: 35px; padding-left: 10px;">{{ joinedmonthlymember.phoneNumber }}</td>
+                <td style="height: 35px; padding-left: 10px;">{{ joinedmonthlymember.gender }}</td>
+                <td style="height: 35px; padding-left: 10px;">{{ joinedmonthlymember.maritalStatus }}</td>
+            </tr>
+        {% endfor %}
+        
+        </tbody>
+    </table>
+</body>
+</html>

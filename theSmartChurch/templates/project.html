@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load ratings %}
+{{block.super}} 
+<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+<div class="jumbotron">
+<div class="container text-warning" style="padding: 60px; ">
+    <div class="row" id="forsermons" >
+        
+        <div class="col-md-5 col-lg-5">
+            <div>
+            <!--  <h3 style='text-align:left;'><strong>Sermon Title </strong></h3>
+                <p>{{project.title}}</p>-->
+                <h3 style='text-align:left;'><strong>Sermon Description</strong></h3>
+                <p>{{project.description}}</p>
+              <!-- <h6><strong> Developer:</strong class=""><a href='/profile/{{project.user.profile.id}}'> {{project.user}}</a></h6><br>--> 
+                <a class="btn btn-info text-center" style="border-radius: 25px;" href="{{project.link}}" target="_blank">Watch the Sermon</a><br><br>
+            </div>
+            <div >
+                <h3 style="font-weight: bold;">Average Rating score:</h3>
+                <p>{% ratings project %} </p>
+            </div>
+   
+        </div>
+
+        <div class='col-md-1 col-lg-1'></div>
+        <div class="col-md-6 col-lg-6" style="padding-top:60px;" >
+            <div class="card ">
+                <img src="{{project.image.url}}" width='100%'height='300px;' alt="{{project.name}}" >
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{%endblock%}

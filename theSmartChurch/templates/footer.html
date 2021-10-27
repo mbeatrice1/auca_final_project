@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .footer {
+    background-color: #474787;
+    padding: 20px 0;
+  }
+
+  .footer-col {
+    width: 25%;
+    padding: 0 15px;
+  }
+
+  .footer-col h4 {
+    font-size: 18px;
+    color: #ffffff;
+    text-transform: capitalize;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    font-weight: 500;
+    position: relative;
+  }
+
+  .footer-col h4::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: #474787;
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+  }
+
+  .footer-col ul li:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  .footer-col ul li a {
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 300;
+    color: #ffffff;
+    display: block;
+    transition: all 0.3s ease;
+  }
+
+  .footer-col ul li a:hover {
+    color: #ffffff;
+    padding-left: 8px;
+  }
+
+  .footer-col .social-links a {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0 10px 10px 0;
+    margin-top: -5px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.5s ease;
+  }
+
+  .footer-col .social-links a:hover {
+    color: #24262b;
+    background-color: #ffffff;
+  }
+
+  /*responsive*/
+  @media(max-width: 767px) {
+    .footer-col {
+      width: 50%;
+      margin-bottom: 30px;
+    }
+  }
+
+  @media(max-width: 574px) {
+    .footer-col {
+      width: 100%;
+    }
+  }
+
+  .bottom {
+    align-items: bottom;
+    margin-top: 20px;
+    margin-bottom: -10px;
+
+  }
+
+  .bottom center a {
+    color: #ffffff;
+    text-decoration: none;
+
+  }
+
+  .bottom center a:hover {
+    text-decoration: underline;
+  }
+
+  .bottom center span {
+    color: #fff;
+  }
+    </style>
+</head>
+<body>
+    <footer class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="footer-col">
+              <h4>church</h4>
+              <ul>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'bookwedding' %}">Services</a></li>
+                <li><a href="{% url 'sermons' %}">Sermons</a></li>
+      
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Get Connected</h4>
+              <ul>
+                <li><a href="#">Book Wedding Date</a></li>
+                <li><a href="#">Watch Sermons</a></li>
+                <li><a href="#">Make an appointment</a></li>
+                <li><a href="#">Register For Baptism</a></li>
+      
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Calvary Ministries</h4>
+              <ul>
+                <li><a href="{% url 'watch' %}">watch</a></li>
+                <li><a href="{% url 'give' %}">Give</a></li>
+                <li><a href="#">Baptism</a></li>
+                <li><a href="{% url 'bookwedding' %}">Weddings</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <div class="social-links">
+                <h4 style="margin-top: 10px;">Contact Us</h4>
+                <div class="content">
+                  <form action="" method="POST" class="form-group">
+                    {% csrf_token %}
+                    <div class="email">
+                      <div class="text" style="color: white;">Email *</div>
+                      <input type="email" class="form-control" name="email" required>
+                    </div>
+                    <div class="msg">
+                      <div class="text" style="color: white;">Message *</div>
+                      <textarea rows="2" class="form-control" cols="20" name="message" required></textarea>
+                    </div>
+                    
+                      <button type="submit" class="btn btn-primary" value="Submit" style="background-color:#ffffff; font-weight: 900; color: #474787; margin-top: 2%;">Send</button>
+                  
+                  </form>
+                </div>
+                <h4 style=" margin-bottom: 15px;">follow us</h4>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bottom">
+          <center>
+            <span class="credit">Created By <a href="{% url 'index' %}" style="color: #ffffff;">Calvary Ministries</a> |
+            </span>
+            <span class="far fa-copyright"></span><span> 2020 All rights reserved.</span>
+          </center>
+        </div>
+      </footer>
+      
+</body>
+</html>

@@ -1,0 +1,284 @@
+{%extends 'base.html'%}
+{% load static%}
+{% block content %}
+{{block.super}}
+<style>
+  .view {
+    min-height: 60%;
+    max-height: 70%;
+    background: linear-gradient(rgba(1, 9, 26, 0.5), rgba(1, 9, 26, 0.5)), url('https://i.postimg.cc/mksJ4Mjd/tomate.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    width: 100%;
+
+    overflow: hidden;
+  }
+
+  #donText {
+    margin-top: 10%;
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+
+  .footer {
+    background-color: #474787;
+    padding: 20px 0;
+  }
+
+  .footer-col {
+    width: 25%;
+    padding: 0 15px;
+  }
+
+  .footer-col h4 {
+    font-size: 18px;
+    color: #ffffff;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+  }
+
+  .footer-col h4::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: #474787;
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+  }
+
+  .footer-col ul li:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  .footer-col ul li a {
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 300;
+    color: #ffffff;
+    display: block;
+    transition: all 0.3s ease;
+  }
+
+  .footer-col ul li a:hover {
+    color: #ffffff;
+    padding-left: 8px;
+  }
+
+  .footer-col .social-links a {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.5s ease;
+  }
+
+  .footer-col .social-links a:hover {
+    color: #24262b;
+    background-color: #ffffff;
+  }
+
+  /*responsive*/
+  @media(max-width: 767px) {
+    .footer-col {
+      width: 50%;
+      margin-bottom: 30px;
+    }
+  }
+
+  @media(max-width: 574px) {
+    .footer-col {
+      width: 100%;
+    }
+  }
+
+  .bottom {
+    align-items: bottom;
+    margin-top: 20px;
+    margin-bottom: -10px;
+
+  }
+
+  .bottom center a {
+    color: #ffffff;
+    text-decoration: none;
+
+  }
+
+  .bottom center a:hover {
+    text-decoration: underline;
+  }
+
+  .bottom center span {
+    color: #fff;
+  }
+  .scroll-top {
+  width: 5%;
+  height: 10%;
+  position:fixed;
+  bottom: 5px;
+  left: 95%;
+  background-color: #fff;
+  border: 1px solid #0b6ab8;
+  
+  
+  
+  display: none;
+}
+.scroll-top:hover{
+  background-color: #fff;
+}
+.scroll-top i {
+  display: inline-block;
+  color: #474787 ;
+  
+}
+
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      offset: 120,
+      easing: 'ease-in-out'
+    })
+    $(document).ready(function () {
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 100) {
+      $('.scroll-top').fadeIn();
+    } else {
+      $('.scroll-top').fadeOut();
+    }
+  });
+
+  $('.scroll-top').click(function () {
+    $("html, body").animate({
+      scrollTop: 0
+    }, 100);
+      return false;
+  });
+
+});
+
+  </script>
+
+
+
+<div class="view container-fluid">
+  <div class="header" style="height: 100vh;">
+    <div class="container" style="color:white;">
+      <div class="row" style="padding-top:50px;">
+
+        <div class="col-md-4"></div>
+
+      </div>
+      <div class="container text-center" id="donText" data-aos="zoom-in-up" data-aos-duration="4000" data-aos-delay="600">
+        <h1 class="hero-title">Donation</h1>
+        <p class="pt-1 hero-description" style="color: #ffffff;">2 Corinthians 9:6-8 NIV
+          Remember this: Whoever sows sparingly will also reap sparingly, and whoever sows
+          generously will also reap generously. Each of you should give what you have decided in
+          your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver.
+          And God is able to bless you abundantly, so that in all things at
+          all times, having all that you need, you will abound in every good work.</p>
+        <p class="text-center my-4" style="color: #ffffff;">We believe in the power of generosity, what it does for the
+          individual doing the giving, and for the purpose that the giving supports.</p>
+        <form>
+          <script src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
+          <a href="{% url 'donate' %}"><button class="btn"
+            style="background-color:#474787 ; color: white; border-radius: 30px; border: 1px solid #ffffff; padding: 10px 30px;"
+            type="button" > Donate </button></a>
+        </form>
+        <!-- <script>
+          const publicKey = "FLWPUBK-a1d3f1ad398f06643c168cf1f4830701-X";
+
+          function payWithRave() {
+            var x = getpaidSetup({
+              PBFPubKey: publicKey,
+              customer_email: "user@example.com",
+              amount: 100,
+              customer_phone: "234099940409",
+              currency: "RWF",
+              txref: "rave-123456",
+              custom_title: "Wildlife Park",
+              onclose: function () { },
+              callback: function (response) {
+                var txref = response.tx.txRef;
+                console.log("This is the response returned after a charge", response);
+                if (
+                  response.tx.chargeResponseCode == "00" ||
+                  response.tx.chargeResponseCode == "0"
+                ) {
+                  document.location.href = "success.html"
+                  // redirect to a success page
+                } else {
+                  // redirect to a failure page.
+                }
+                x.close();
+              }
+            });
+          }
+
+        </script> -->
+
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+<div class="jumbotron">
+  <div class="container" id="content" >
+    <div class="row" >
+      <!-- <div class="col-md-4">
+                <di class="mail">
+                <i class="fas fa-envelope" style="font-size: 420%; margin-bottom: 10px;"></i>
+            </di>
+                <h2 class="text-terracota text-uppercase" style="color: #227093;">Mail </h2>
+                <p></p>
+                <p><a class="cta-link" href="https://calvary.com/contact/">Get Directions <i
+                            class="fa fa-arrow-right" style="color: #227093;"></i></a></p>
+
+            </div> -->
+      <div class="col-md-6" data-aos="fade-right" data-aos-duration="6000" data-aos-delay="1000">
+        <i class="fas fa-mobile-alt" style="font-size: 420%; margin-bottom: 10px;"></i>
+        <h2 class="text-terracota text-uppercase" style="color: #474787;">Mobile Money</h2>
+        <p>You may want to donate using Mobile money as it is an easiest way to transfer money
+          very quickly
+        </p>
+
+
+
+
+      </div>
+      <div class="col-md-6" data-aos="fade-left" data-aos-duration="7000" data-aos-delay="1200">
+        <i class="far fa-credit-card" style="font-size: 420%; margin-bottom: 10px;"></i>
+        <h2 class="text-terracota text-uppercase" style="color: #474787;">Online</h2>
+        <p>Give using credit card is also another good way you may use donating beacuse this method.
+          is accessible every where you are in this world. This involves using your debit or credit card, or bank
+          account.
+        </p>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<button class="btn btn-primary scroll-top" data-scroll="up" type="button">
+  <i class="fa fa-chevron-up"></i>
+  </button> 
+
+
+{%endblock%}

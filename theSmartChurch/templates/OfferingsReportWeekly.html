@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>offeringsReport</title>
+</head>
+<body>
+    
+    <img src="https://i.postimg.cc/BnbcSwgQ/image-1.png" style=" width: 35%;">
+    
+
+    <h1 style="text-align: center;font-style: oblique;"><strong>WEEKLY OFFERINGS</strong></h1>
+    <br>
+
+    <table class="styled-table" border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th style="height: 35px;">Name</th>
+                <th style="height: 35px;">Email</th>
+                <th style="height: 35px;"> Phone Number</th>
+                <th style="height: 35px; margin-right: 35px;">Amount</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for offerings in offerringsWeekly %}
+            <tr>
+                <td style="height: 35px; padding-left: 10px;">{{ offerings.name }}</td>
+                <td style="height: 35px; padding-left: 10px;">{{ offerings.email }}</td>
+                <td style="height: 35px; padding-left: 10px;">{{ offerings.phone }}</td>
+                <td style="height: 35px; padding-left: 10px;">{{ offerings.amount }} Rwf</td>
+            </tr>
+        {% endfor %}
+        
+        </tbody>
+    </table>
+    <br><br>
+    <h1 style="color: #000; margin-left: 550px;"><strong>TOTAL: {{sum_donation}} Rwf</strong></h1>
+</body>
+</html>

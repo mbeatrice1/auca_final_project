@@ -1,0 +1,140 @@
+{%extends 'base.html'%}
+{% load static%}
+
+
+{%block content%}
+<br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <a href="{% url 'monthlyJoinedMembers' %}" class="btn btn-block btn-info">Monthly Joined Christians</a>
+        </div>
+        <div class="col-md-4">
+            <a href="{% url 'appointmentWe' %}" class="btn btn-block btn-info">Wedding Monthly Booked Date</a>
+        </div>
+       
+        <div class="col-md-4">
+            <a href="{% url 'sundayService' %}" class="btn btn-block btn-info" style="font-weight: 100;">Sunday Service Attendees</a>
+        </div>
+    </div>  
+    <br><br>
+    <div class="row">
+        <div class="col-md-4">
+            <a href="{% url 'OfferingsReport' %}" class="btn btn-block btn-info">Monthly Offerings</a>
+        </div>
+        <div class="col-md-4">
+            <a href="{% url 'OfferingsReportWeekly' %}" class="btn btn-block btn-info">Weekly Offerings</a>
+        </div>
+       <!-- 
+        <div class="col-md-4">
+            <a href="{% url 'sundayService' %}" class="btn btn-block btn-info" style="font-weight: 100;">Sunday Service Attendees</a>
+        </div> -->
+    </div>  
+</div>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <!-- <div class="card"> -->
+            <canvas id="myChart2" width="70" height="50"></canvas>
+            <!-- </div> -->
+    </div>
+    <div class="col-md-6">
+        <!-- <div class="card"> -->
+            <canvas id="myChart3" width="70" height="50"></canvas>
+            <!-- </div> -->
+    </div>
+</div>
+
+<script>
+    var ctx = document.getElementById('myChart2').getContext('2d');
+    var myChart2 = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            datasets: [{
+                label: '# of How christians Joined the church Monthly',
+                data: ['{{january}}', '{{february}}', '{{march}}', '{{april}}' ,'{{may}}', '{{june}}', '{{july}}', '{{august}}', '{{september}}', '{{october}}', '{{november}}', '{{december}}'],
+                backgroundColor: [
+                    'rgba(43, 50, 80)',
+                    'rgba(43, 50, 80)',
+                    'rgba(43, 50, 80)',
+                    'rgba(43, 50, 80)',
+                    'rgba(43, 50, 80)',
+                    'rgba(43, 50, 80)',
+                    'rgba(43, 50, 80)',
+                    'rgba(43, 50, 80)',
+                    'rgba(43, 50, 80)',
+                    'rgba(43, 50, 80)',
+                    'rgba(43, 50, 80)',
+                    'rgba(43, 50, 80)',
+                ],
+                // borderColor: [
+                //     'rgba(43, 50, 80)',
+                //     'rgba(54, 162, 235, 1)',
+                //     'rgba(255, 206, 86, 1)',
+                //     'rgba(75, 192, 192, 1)',
+                // ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                gridLines: {
+                  display: true
+                },
+                ticks: {
+                  beginAtZero: true
+                }
+              }],
+              
+            },
+            title: {
+              display: true,
+              text: 'Document Status chart'
+            }
+        }
+    });
+
+    var ctx = document.getElementById('myChart3').getContext('2d');
+    var myChart2 = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Pending Wedding Appointments', 'Approved Wedding Appointments'],
+            datasets: [{
+                label: '# of Wedding Appointments',
+                data: ['{{pending_W_apointments_percent}}', '{{all_W_appointments_percent}}'],
+                backgroundColor: [
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                gridLines: {
+                  display: true
+                },
+                ticks: {
+                  beginAtZero: true
+                }
+              }],
+              
+            },
+            title: {
+              display: true,
+              text: 'Document Status chart'
+            }
+        }
+    });
+    
+    </script> 
+
+{% endblock %}

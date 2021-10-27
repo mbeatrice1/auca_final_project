@@ -1,0 +1,18 @@
+{%extends 'base.html'%}
+{% load static%}
+{% block content %}
+{{block.super}}
+    <div class="jumbotron text-center">
+        <h1 class="display-3">Thank You!</h1>
+        <p class="lead">Thank you for your generous gift to Calvary Ministries. We are thrilled to have your support.</p>
+        <hr>
+        <p>
+          Having trouble? <a href="">Contact us</a>
+        </p>
+        <p class="lead">
+          <a class="btn" href="{% url 'index' %}" role="button" style="background-color:#474787; color: #fff;">Continue to homepage</a>
+        </p>
+      </div>
+      
+
+{%endblock%}

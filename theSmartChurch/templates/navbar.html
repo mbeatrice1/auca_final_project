@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Hamburger Navbar</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    font-size: 72.5%;
+    font-family: 'Roboto', sans-serif;
+}
+#navbar{
+  font-family: 'Roboto', sans-serif;}
+        @media screen and (max-width:100%){
+        #search_form, #profile, .upload{
+     display: none;
+     
+        }
+    }
+
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.header{
+    border-bottom: 1px solid #E2E8F0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: #474787;
+}
+
+.hamburger {
+    display: none;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: #101010;
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-item {
+    margin-left: 5rem;
+}
+
+.nav-link{
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #fff;
+}
+
+.nav-link:hover{
+  text-decoration: underline solid #fff 2px;
+  text-underline-offset:0.5em ;
+  transition: .5s;
+  background-color: none;
+}
+
+.nav-logo {
+    font-size: 2.1rem;
+    font-weight: 500;
+    color: #482ff7;
+}
+
+@media only screen and (max-width: 768px) {
+    .nav-menu {
+        position:fixed;
+        left: -100%;
+        top: 5rem;
+        flex-direction: column;
+         z-index: 2000;
+        background-color: #474787;
+        width: 100%;
+        border-radius: 10px;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow:
+            0 10px 27px rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-item {
+        margin: 2.5rem 0;
+    }
+
+    .hamburger {
+        display: block;
+        cursor: pointer;
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        -webkit-transform: translateY(8px) rotate(45deg);
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        -webkit-transform: translateY(-8px) rotate(-45deg);
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}
+.active {
+    color: #A6D609;
+}
+</style>
+
+<body>
+    <header class="header">
+        <nav class="navbar">
+          <a href="{% url 'index' %}">
+            <img src="https://i.postimg.cc/BnbcSwgQ/image-1.png" style=" width: 35%; ">
+          </a>
+            
+            <ul class="nav-menu">
+            {% if request.user.is_authenticated %}
+              <li><a class="{% if 'home' in request.path %} nav-link active {% else %} nav-link {% endif %}"  href="{% url 'index' %}" id="forNav">Home</a></li>
+             
+             <li><a href="{% url 'about' %}" class="{% if 'about' in request.path %} nav-link active {% else %} nav-link {% endif %}"  href="{% url 'index' %}" id="forNav">About</a></li>
+              <li><a href="{% url 'watch' %}" class="{% if 'watch' in request.path %} nav-link active {% else %} nav-link {% endif %}"  href="{% url 'index' %}" id="forNav">Watch Sermons</a></li>
+              <li><a href="{% url 'reports' %}" class="{% if 'reports' in request.path %} nav-link active {% else %} nav-link {% endif %}" id="forNav">Reports</a></li>
+              <li><a class="{% if 'dashboard' in request.path %} nav-link active {% else %} nav-link {% endif %}"  href="{% url 'dashboard' %}" id="forNav">Dashboard</a></li>
+               {% if user.is_superuser %}
+                <li><a href="{% url 'register' %}" class="{% if 'register' in request.path %} nav-link active {% else %} nav-link {% endif %}" id="forNav">Register Accounts</a></li>
+                {% endif %}
+
+              {% else %}
+              <li><a class="{% if 'home' in request.path %} nav-link active {% else %} nav-link {% endif %}"  href="{% url 'index' %}" id="forNav">Home</a></li>
+              <li><a href="{% url 'about' %}" class="{% if 'about' in request.path %} nav-link active {% else %} nav-link {% endif %}"  href="{% url 'index' %}" id="forNav">About</a></li>
+              <li><a href="{% url 'watch' %}" class="{% if 'watch' in request.path %} nav-link active {% else %} nav-link {% endif %}"  href="{% url 'index' %}" id="forNav">Watch Sermons</a></li>
+              <li><a href="{% url 'christiansR' %}" class="{% if 'christiansR' in request.path %} nav-link active {% else %} nav-link {% endif %}" id="forNav">Join us</a></li>
+              <li><a href="{% url 'makeAppointment' %}" class="{% if 'makeAppointment' in request.path %} nav-link active {% else %} nav-link {% endif %}" id="forNav">Appointment</a></li>
+              <li><a href="{% url 'give' %}"  class="{% if 'give' in request.path %} nav-link active {% else %} nav-link {% endif %}" id="forNav">Give</a></li>
+            
+              <li><div><a href="{%url 'bookwedding'%}" id="forNav" class="{% if 'bookwedding' in request.path %} nav-link active {% else %} nav-link {% endif %}">Book Wedding</a></div></li>
+              {% endif %}           
+            <li>
+              <div class="col-md-2" >
+                  <div class="row" id='profile'>
+                      {% if user.is_authenticated %}
+                      <div class="col-md-8">
+                          
+                          <div class="dropdown">
+                              <a class="btn btn" data-toggle="dropdown" 
+                                  aria-haspopup="true" aria-expanded="false" style="font-size: 1.6rem;
+                                  font-weight: 400;
+                                  color: #fff;"  id="forNav">{{ user.username }} 
+                                  <!-- <img src='{{user.profile.profile_picture.url}}' width='18px' height='18px' style='border-radius:50%;'>  -->
+                              </a>
+                              <div class="dropdown-menu" style="width:300px; background-color:#474787;">
+                                  <!--<a class="dropdown-item" href="{%url 'my_profile'%}" id="forNav" style="font-size: 1.6rem;
+                                  font-weight: 400;
+                                  color: #fff;">Profile</a>
+                                   <a href="{% url 'christiansR' %}" id="forNav" style="font-size: 1.6rem;
+                                   font-weight: 400;
+                                   color: #fff;">Christians</a>
+                                  <div class="dropdown-divider"></div>-->
+                                  <a class="dropdown-item" href="/logout" id="forNav" style="font-size: 1.6rem;
+                                  font-weight: 400;
+                                  color: #fff;">Logout</a>
+                              </div>
+                          </div>
+                      </div>
+                      {% else %}
+  
+                      <a href="/accounts/login/?next=/" style="color: white;">Administration</a>
+  
+                      {% endif %}
+                  </div>
+              </div>
+          </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+</body>
+
+<script >
+    const hamburger = document.querySelector(".hamburger");
+const navMenu = document.querySelector(".nav-menu");
+const navLink = document.querySelectorAll(".nav-link");
+
+hamburger.addEventListener("click", mobileMenu);
+navLink.forEach(n => n.addEventListener("click", closeMenu));
+
+function mobileMenu() {
+    hamburger.classList.toggle("active");
+    navMenu.classList.toggle("active");
+}
+
+function closeMenu() {
+    hamburger.classList.remove("active");
+    navMenu.classList.remove("active");
+}
+</script>
+</html>

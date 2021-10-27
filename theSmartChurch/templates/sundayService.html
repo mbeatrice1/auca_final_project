@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sunday services</title>
+</head>
+<body>
+    
+    <img src="https://i.postimg.cc/BnbcSwgQ/image-1.png" style=" width: 35%;">
+    
+
+    <h1 style="text-align: center;font-style: oblique;"><strong>30% OF CHRISTIANS ATTENDING NEXT WEEK</strong></h1>
+    <br>
+
+    <table class="styled-table" border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th style="height: 35px;">First Name</th>
+                <th style="height: 35px;">Last Name </th>
+                <th style="height: 35px; margin-right: 35px;">Address</th>
+                <th style="height: 35px;">Phone Number</th>
+                <th style="height: 35px;">Date </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sundayMember in sundayMembers %}
+            <tr>
+                <td style="height: 35px; padding-left: 10px;">{{ sundayMember.firstname }}</td>
+                <td style="height: 35px; padding-left: 10px;">{{ sundayMember.lastname }}</td>
+                <td style="height: 35px; padding-left: 10px;">{{ sundayMember.add }}</td>
+                <td style="height: 35px; padding-left: 10px;">{{ sundayMember.phoneNmber }}</td>
+                <td style="height: 35px; padding-left: 10px;">{{ sundayMember.dateRe }}</td>
+            </tr>
+        {% endfor %}
+        
+        </tbody>
+    </table>
+</body>
+</html>
